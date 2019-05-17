@@ -1,7 +1,8 @@
 // import actions when ready
 
 const initialState = {
-    friends: []
+    friends: [],
+    isLoggingIn: false
 }
 
 const reducer = (state = initialState, action) => {

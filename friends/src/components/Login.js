@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import {login} from '../actions'
+
 
 class Login extends Component {
     constructor() {
         super();
         this.state = {
-            credentials: {
+            userInfo: {
                 username: '',
                 password: ''
             }
         }
     }
 
-    handleChanges = event => {
+    handleChanges = event => {        
         this.setState({
-            ...this.state.credentials,
+            userInfo: {
+                ...this.state.userInfo,
             [event.target.name]: event.target.value
+            } 
         })
+
+        console.log(this.state.userInfo.username,this.state.userInfo.password)
 
     }
 
     login = event => {
         event.preventDefault();
+        this.props.login()
     }
 
 
@@ -31,20 +39,30 @@ class Login extends Component {
                     <input
                         type="text"
                         name="username"
-                        value={this.state.credentials.username}
-                        onChange={this.handleChange}
+                        value={this.state.userInfo.username}
+                        onChange={this.handleChanges}
                     />
                     <input
                         type="password"
                         name="password"
-                        value={this.state.credentials.password}
-                        onChange={this.handleChange}
+                        value={this.state.userInfo.password}
+                        onChange={this.handleChanges}
                     />
-                    <button>Log-In</button>
+                    <button onClick={this.login}>
+                    {this.props.isLoggingIn ? (
+                        'Loading...'
+                        ) : (
+                        'Log in'
+                        )}
+                    </button>
                 </form>
             </div>
         );
     }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+    isLoggingIn: state.isLoggingIn
+  });
+
+export default connect(mapStateToProps, {login})(Login);
