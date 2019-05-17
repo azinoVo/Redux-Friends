@@ -2,11 +2,13 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import Login from './components/Login';
+import PrivateFriends from './components/PrivateFriends';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (
     <div className="App">
-      <h1>TESTING</h1>
+      <h1>Private Friends</h1>
       <Router>
         <nav className="navbar">
           <Link to='/login'>Login</Link>
@@ -15,6 +17,7 @@ function App() {
 
 
         <Route path='/login' component={Login} />
+        <PrivateRoute exact path="/private" component={PrivateFriends} />
       </Router>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {login} from '../actions'
+import { login } from '../actions'
 
 
 class Login extends Component {
@@ -14,21 +14,21 @@ class Login extends Component {
         }
     }
 
-    handleChanges = event => {        
+    handleChanges = event => {
         this.setState({
             userInfo: {
                 ...this.state.userInfo,
-            [event.target.name]: event.target.value
-            } 
+                [event.target.name]: event.target.value
+            }
         })
 
-        console.log(this.state.userInfo.username,this.state.userInfo.password)
+        console.log(this.state.userInfo.username, this.state.userInfo.password)
 
     }
 
     login = event => {
         event.preventDefault();
-        this.props.login()
+        this.props.login(this.state.userInfo);
     }
 
 
@@ -49,11 +49,11 @@ class Login extends Component {
                         onChange={this.handleChanges}
                     />
                     <button onClick={this.login}>
-                    {this.props.isLoggingIn ? (
-                        'Loading...'
+                        {this.props.isLoggingIn ? (
+                            'Loading...'
                         ) : (
-                        'Log in'
-                        )}
+                                'Log in'
+                            )}
                     </button>
                 </form>
             </div>
@@ -63,6 +63,6 @@ class Login extends Component {
 
 const mapStateToProps = state => ({
     isLoggingIn: state.isLoggingIn
-  });
+});
 
-export default connect(mapStateToProps, {login})(Login);
+export default connect(mapStateToProps, { login })(Login);

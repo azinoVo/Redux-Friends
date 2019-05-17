@@ -12,11 +12,14 @@ export const LOGIN_FAIL = 'LOGIN_FAIL'
 // catch any errors
 
 export const login = userInfo => dispatch => {
-    dispatch({type:LOGIN_START});
-    return axios.post('http://localhost:5000/api/login', userInfo)
-    .then(res => 
-        console.log(res))
-        localStorage.setItem('token', res.data.payload)
-        dispatch({type:LOGIN_SUCCESS, payload:res.data.payload})
-    .catch(err => console.log(err));
+    dispatch({ type: LOGIN_START });
+
+    return axios
+        .post('http://localhost:5000/api/login', userInfo)
+        .then(res => {
+            console.log(res)
+            localStorage.setItem('token', res.data.payload)
+            dispatch({ type: LOGIN_SUCCESS, payload: res.data.payload })
+        })
+        .catch(err => console.log(err));
 };
