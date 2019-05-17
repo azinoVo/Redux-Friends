@@ -28,7 +28,9 @@ class Login extends Component {
 
     login = event => {
         event.preventDefault();
-        this.props.login(this.state.userInfo);
+        this.props.login(this.state.userInfo).then(() => {
+            this.props.history.push('/private');
+          });
     }
 
 
